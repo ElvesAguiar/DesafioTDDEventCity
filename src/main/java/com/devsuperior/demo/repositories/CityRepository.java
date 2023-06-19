@@ -1,0 +1,4 @@
+package com.devsuperior.demo.repositories;
+
+public interface CityRepository {
+}
