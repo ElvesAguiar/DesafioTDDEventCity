@@ -29,4 +29,12 @@ public class CityController {
                 .buildAndExpand(dto.getId()).toUri();
         return ResponseEntity.created(uri).body(service.insert(dto));
     }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> findAll(@PathVariable Long id) {
+
+        service.delete(id);
+
+        return ResponseEntity.noContent().build();
+    }
 }

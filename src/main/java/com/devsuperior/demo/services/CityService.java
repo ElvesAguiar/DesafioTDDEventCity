@@ -4,6 +4,7 @@ import com.devsuperior.demo.dto.CityDTO;
 import com.devsuperior.demo.entities.City;
 import com.devsuperior.demo.repositories.CityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,5 +34,12 @@ public class CityService {
         return new CityDTO(entity);
     }
 
+    public void delete(Long id) {
+        try {
+            repository.deleteById(id);
+        } catch (DataIntegrityViolationException e) {
+            throw new DataIntegrityViolationException(e.getMessage());
+        }
 
+    }
 }
