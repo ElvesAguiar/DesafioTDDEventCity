@@ -9,6 +9,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CityService {
@@ -37,7 +38,9 @@ public class CityService {
 
     public void delete(Long id) {
         try {
-            repository.deleteById(id);
+            Optional<City> entity = repository.findById(id);
+            if(entity.isEmpty()) throw new EntityNotFoundException();
+            repository.delete(entity.get());
         } catch (DataIntegrityViolationException e) {
             throw new DataIntegrityViolationException(e.getMessage());
         }catch (EntityNotFoundException e) {

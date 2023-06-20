@@ -36,10 +36,10 @@ public class ResourceHandler extends ResponseEntityExceptionHandler {
 
         StandartError error = new StandartError();
         error.setError(ex.getMessage());
-        error.setStatus(HttpStatus.BAD_REQUEST.value());
+        error.setStatus(HttpStatus.NOT_FOUND.value());
         error.setTimestamp(Instant.now());
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path(request.getContextPath()).build().toUri();
         error.setPath(uri.getPath());
-        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
 }
