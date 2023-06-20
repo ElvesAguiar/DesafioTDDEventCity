@@ -7,6 +7,7 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,6 +18,7 @@ public class CityService {
     @Autowired
     CityRepository repository;
 
+    @Transactional(readOnly = true)
     public List<CityDTO> findAll() {
 
         List<City> result = repository.findAll()
@@ -27,6 +29,7 @@ public class CityService {
         return result.stream().map(CityDTO::new).toList();
     }
 
+    @Transactional
     public CityDTO insert(CityDTO dto) {
 
         City entity = new City();
@@ -36,6 +39,7 @@ public class CityService {
         return new CityDTO(entity);
     }
 
+    @Transactional
     public void delete(Long id) {
         try {
             Optional<City> entity = repository.findById(id);

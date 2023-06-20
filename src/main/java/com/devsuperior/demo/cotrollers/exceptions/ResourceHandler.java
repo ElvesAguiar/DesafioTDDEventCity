@@ -18,7 +18,7 @@ import java.time.Instant;
 public class ResourceHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(DataIntegrityViolationException.class)
-    public ResponseEntity<Object> handleCityDataIntegrityViolationException(
+    public ResponseEntity<StandartError> handleCityDataIntegrityViolationException(
             DataIntegrityViolationException ex, WebRequest request) {
 
         StandartError error = new StandartError();
@@ -31,7 +31,7 @@ public class ResourceHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(EntityNotFoundException.class)
-    public ResponseEntity<Object> handleCityNotFoundException(
+    public ResponseEntity<StandartError> handleCityNotFoundException(
             EntityNotFoundException ex, WebRequest request) {
 
         StandartError error = new StandartError();
