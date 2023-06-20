@@ -3,6 +3,7 @@ package com.devsuperior.demo.services;
 import com.devsuperior.demo.dto.CityDTO;
 import com.devsuperior.demo.entities.City;
 import com.devsuperior.demo.repositories.CityRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -39,6 +40,8 @@ public class CityService {
             repository.deleteById(id);
         } catch (DataIntegrityViolationException e) {
             throw new DataIntegrityViolationException(e.getMessage());
+        }catch (EntityNotFoundException e) {
+            throw new EntityNotFoundException(e.getMessage());
         }
 
     }
